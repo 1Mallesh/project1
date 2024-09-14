@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Responsive Header and Subheader</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+    <style>
+        /* Subheader Styling */
+        .sub-header {
+            background-color: #f8f9fa;
+            border-bottom: 2px solid #e0e0e0;
+            padding: 15px 0;
+        }
+
+        .sub-header a {
+            color: #000;
+            padding: 0 15px;
+            display: inline-flex;
+            align-items: center;
+            text-decoration: none;
+
+        }
+
+        .sub-header i {
+            margin-right: 8px;
+        }
+
+        /* Borders between elements */
+        .sub-header .contact-info>div:not(:last-child),
+        .sub-header .social-icons>div {
+            border-right: 2px solid #e0e0e0;
+        }
+
+        .sub-header .social-icons>div:first-child {
+            border-left: 2px solid #e0e0e0;
+        }
+
+        .navbar-nav .nav-item:not(:first-child)::after {
+            content: "+";
+            display: inline-block;
+            width: 6px;
+            /* Adjust size as needed */
+            height: 6px;
+            /* Adjust size as needed */
+            margin-left: -16px;
+            /* Space between the text and image */
+            /* background: url('fa-solid fa-plus') ; */
+            background-repeat: center center;
+            background-size: contain;
+            position: absolute;
+            top: 42%;
+
+        }
+
+        /* Additional styling for the search form */
+        .input-group {
+            position: relative;
+        }
+
+        .input-group .form-control {
+            padding-left: 50px;
+            /* Space for the icon */
+        }
+
+        .input-group .input-group-text {
+            position: absolute;
+            top: 50%;
+            left: 10px;
+            /* Adjust the space between the icon and the edge */
+            transform: translateY(-50%);
+            border: none;
+            /* Remove border if needed */
+            background: transparent;
+            /* Transparent background */
+            pointer-events: none;
+            /* Disable pointer events for the icon */
+        }
+
+        .input-group .input-group-text i {
+            font-size: 16px;
+            /* Adjust icon size */
+        }
+
+        /* Ensure the button does not overlap */
+        form .btn {
+            margin-left: 10px;
+            /* Adjust spacing between input and button */
+        }
+
+        /* Mobile view: collapse navbar at 991px */
+        @media (max-width: 991px) {
+            .sub-header .navbar-collapse {
+                justify-content: center;
+            }
+
+            .sub-header .contact-info,
+            .sub-header .social-icons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .sub-header .contact-info>div,
+            .sub-header .social-icons>div {
+                border-right: none;
+                border-left: none;
+                margin-bottom: 10px;
+                padding: 0;
+            }
+
+            .sub-header .social-icons>div:first-child {
+                border-left: none;
+            }
+
+            .sub-header .social-icons>div:last-child {
+                border-right: none;
+            }
+
+            .sub-header .navbar-toggler {
+                border: none;
+                outline: none;
+                position: relative;
+                z-index: 1000;
+                /* Ensure hamburger is above content */
+            }
+        }
+
+        /* Header styling */
+        header {
+            background-color: aliceblue;
+            position: relative;
+        }
+
+        header .navbar-brand {
+            max-width: 189px;
+            width: 100%;
+        }
+
+        header .navbar .container-fluid {
+            padding: 20px 20px 0px 20px;
+            background: transparent !important;
+            position: relative;
+        }
+
+        header .navbar .container-fluid .nav-item {
+            margin: 0px 10px;
+        }
+
+        header .nav-link {
+            font-size: 14px;
+            font-family: Arial, sans-serif;
+            font-weight: 500;
+            color: #333;
+        }
+
+
+
+        header .navbar-nav .nav-item:nth-child(5) .nav-link {
+            background-color: #FCB962;
+        }
+
+        header .navbar-toggler {
+            border: none;
+            outline: none;
+            position: absolute;
+            right: 20px;
+            /* Hamburger aligned to the right */
+            top: 20px;
+        }
+
+        /* Hamburger icon styles */
+        header .navbar-toggler .navbar-toggler-icon {
+            font-size: 24px;
+            color: #333;
+        }
+
+        /* Mobile navigation */
+        @media (max-width: 992px) {
+            header .navbar-collapse {
+                background: #FFFFFF;
+                box-shadow: 2px 2px 6px rgba(0, 0, 0, .3);
+                height: 100%;
+                position: fixed;
+                right: -100%;
+                top: 0;
+                width: 300px;
+                /* Adjust the width if needed */
+                transition: right 0.3s ease-in-out;
+                padding: 23px 20px;
+                z-index: 999;
+                /* Ensure menu is above other content */
+            }
+
+            header .navbar-collapse.show {
+                right: 0;
+                /* Mobile menu slides in from the right */
+            }
+
+            .responsive_navbar {
+                display: block;
+            }
+        }
+
+        /* Content Styling */
+        .content {
+            max-width: 500px;
+            width: 100%;
+        }
+
+        .section-content {
+            padding: 50px 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Subheader Section -->
+    <div class="sub-header">
+        <nav class="navbar navbar-expand-lg ">
+            <div class="container">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
+                    aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarContent">
+                    <!-- Contact Information -->
+                    <div class="d-flex flex-column flex-lg-row contact-info">
+                        <div>
+                            <a href="tel:+1234567890">
+                                <i class="fas fa-phone"></i> 234567890
+                            </a>
+                        </div>
+                        <div>
+                            <a href="mailto:example@example.com">
+                                <i class="fas fa-envelope"></i> info@xxxx.com
+                            </a>
+                        </div>
+                        <div>
+                            <a href="https://goo.gl/maps/your-location-link" target="_blank">
+                                <i class="fas fa-map-marker-alt"></i> Nagarbhavi Balleri
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Social Media Links -->
+                    <div class="d-flex flex-column flex-lg-row social-icons ms-lg-auto mt-3 mt-lg-0">
+                        <div>
+                            Find us on:
+                            <a href="https://facebook.com" target="_blank">
+                                <i class="fab fa-facebook"></i>
+                            </a>
+                        </div>
+                        <div>
+                            <a href="https://instagram.com" target="_blank">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                        </div>
+                        <div>
+                            <a href="https://linkedin.com" target="_blank">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                        </div>
+                        <div>
+                            <a href="https://github.com" target="_blank">
+                                <i class="fab fa-github"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <!-- Main Header Section -->
+    <header>
+        <div class="container">
+            <nav class="navbar navbar-expand-lg">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="#">
+                        <!-- <img src="https://hexaware.com/wp-content/themes/hexaware/assets/images/logo.svg" alt="Logo"> -->
+                        <i class="fa-brands fa-apple"></i>
+                    </a>
+                    <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                        <ul class="navbar-nav mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="#">home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link position-relative" href="#">course</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link  position-relative" href="#">resources</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link  position-relative" href="#">contact</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link  position-relative" href="#">Request a Demo</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Content Section -->
+    <section class="section-content">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 align-self-center">
+                    <div class="content">
+                        <h2>Uplift Your Career</h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui explicabo tenetur dolor quo aut
+                            rem ea cumque dolore dignissimos obcaecati. Soluta voluptatem cumque ipsam iste sit
+                            dolorum.</p>
+                        <form class="d-flex align-items-center mt-4 position-relative mt-5  ">
+                            <div class="input-group">
+                                <input class="form-control pe-5" type="search" placeholder="Search..."
+                                    aria-label="Search">
+                                <span class="input-group-text">
+                                    <i class="fas fa-search"></i>
+                                </span>
+                            </div>
+                            <button class="btn btn-primary ms-2" type="submit">Search</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-md-6 align-self-center">
+                    <figure class=" mt-5">
+                        <img src="https://hexaware.com/wp-content/uploads/2024/08/Thumbnail_Blumetra-1.jpg"
+                            alt="Content Image" class="img-fluid">
+                    </figure>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
